@@ -10,6 +10,7 @@ You also have a couple of options:
 
 - `defaultStyling` - either the default styling is used or not (if not, you need to add them manually);
 - `speed` - how fast the background will move in relation with the scroll event. A higher value means a faster scroll ( `1` means that there will be no effect whatsoever)
+- If you need to force resizing (e.g. you inject some elements into DOM that change the initial position of the parallax-ed element), you can do it by using `$( window ).trigger('re-parallax');`
 
 ### Some hints
 
