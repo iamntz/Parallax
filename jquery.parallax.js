@@ -2,6 +2,7 @@
 Plugin: jQuery Parallax
 Version 1.0.0
 Author: Ionuț Staicu
+License: MIT
 */
 
 
