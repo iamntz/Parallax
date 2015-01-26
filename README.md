@@ -1,3 +1,7 @@
+### How it looks?
+
+Like this: http://codepen.io/iamntz/pen/QwgVGY
+
 ### How to use
 
 1. Obviously, include jQuery and this script;
