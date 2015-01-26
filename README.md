@@ -21,6 +21,7 @@ You also have a couple of options:
 - use larger enough images (take a look in your google analytics at most common resolutions, to avoid large images!);
 - even if you need real large images, save them at 1.5 size (e.g. if you need 1000px wide, save it as 1500px wide) with very high JPG compression (quality down to 20% or even less);
 - make sure your content won't exceed the image height, otherwise the image will be too stretched
+- Chrome on Windows doesn't have smooth scroll enabled, so this won't be too visible. However! You could make good use of a plugin like [this one](https://github.com/simov/simplr-smoothscroll)
 
 ### Browser compatibility
 This should be compatible with whatever browser supports `background-size:cover`. I.e. IE9 and up.
