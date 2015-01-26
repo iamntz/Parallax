@@ -1,6 +1,6 @@
 ### How it looks?
 
-Like this: http://codepen.io/iamntz/pen/QwgVGY
+Like this: http://codepen.io/iamntz/full/QwgVGY/
 
 ### How to use
 
