@@ -85,9 +85,8 @@ License: MIT
 
 		return this.each(function(){
 			var obj = Object.create( Parallax );
-			obj.init( this, options );
+			var itemOptions = $.extend( {}, options, $( this ).data() );
+			obj.init( this, itemOptions );
 		});
 	};
 })( jQuery, document );
-
-
