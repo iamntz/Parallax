@@ -12,29 +12,37 @@ License: MIT
 	var Parallax = {
 		init: function( el, options ){
 			this.el = $( el );
+			this.scrollThrottle = 0;
 			this.win = $( window );
 
 			this.options = options;
 
 			this.appendBackground();
 
-			this.win.on( 'resize', $.proxy( this.reInitialize, this ) );
-			this.win.on( 'scroll', $.proxy( this.scroll, this ) );
+			this.win.on( 'resize re-parallax', $.proxy( this.reInitialize, this ) );
 
-			$( window ).on('re-parallax', $.proxy( this.reInitialize, this ) );
+			if( !this.options.disable ){
+				this.win.on( 'scroll', $.proxy( this.scroll, this ) );
+			}
+
 			$( window ).trigger('re-parallax');
 		},
 
 
 		reInitialize: function(){
+		  this.setCoords();
+		  this.scroll();
+		},
+
+
+		setCoords: function(){
 			this.winHeight  = this.win.height();
 			this.initialTop = this.el.offset().top;
-			this.scroll();
 		},
 
 
 		appendBackground: function(){
-			this.divBG = $('<div />');
+			this.divBG = $('<div class="parallaxBG" />');
 
 			if( this.options.defaultStyling ){
 				this.divBG.css({
@@ -59,10 +67,20 @@ License: MIT
 		},
 
 		scroll: function(){
+			if( this.options.setCoordsLive && this.scrollThrottle > this.options.scrollThrottle ){
+				this.setCoords();
+				this.scrollThrottle = 0;
+			}
+
 			var scrollTop = this.win.scrollTop();
 			var currentTop = this.el.offset().top;
 			var height = this.el.outerHeight( true );
-			var newYPos = Math.round( ( this.initialTop - scrollTop ) * this.options.speed );
+
+			var newYPos = 0;
+
+			if( !this.options.disable ){
+				newYPos = Math.round( ( this.initialTop - scrollTop ) * this.options.speed );
+			}
 
 			newYPos += 'px';
 
@@ -71,6 +89,7 @@ License: MIT
 			}
 
 			this.divBG.css('backgroundPosition', [ '50%', newYPos ].join(' ') );
+			this.scrollThrottle += 1;
 		},
 	};
 
@@ -80,7 +99,10 @@ License: MIT
 
 		options = $.extend({
 			speed         : 0.5,
-			defaultStyling: true
+			defaultStyling: true,
+			disable: false,
+			scrollThrottle : 10,
+			setCoordsLive : true
 		}, options );
 
 		return this.each(function(){
@@ -90,3 +112,5 @@ License: MIT
 		});
 	};
 })( jQuery, document );
+
+
